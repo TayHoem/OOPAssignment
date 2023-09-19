@@ -1,0 +1,60 @@
+
+Flight ID: F01
+Departure COuntry: Japan
+Arrival Country: England
+Boarding Time: 5
+Departure Time: 5
+Estimate Arrival Time: 5
+Departure Date: 5
+Arrival Date: 5
+Economy Price: RM 5.0
+Business Price: RM 5.0Plane No= 5
+Number of Seat= 5
+
+Flight ID: F02
+Departure COuntry: Malaysia
+Arrival Country: China
+Boarding Time: 5
+Departure Time: 5
+Estimate Arrival Time: 5
+Departure Date: 57
+Arrival Date: 7
+Economy Price: RM 7.0
+Business Price: RM 7.0Plane No= 7
+Number of Seat= 7
+
+Flight ID: F01
+Departure COuntry: Japan
+Arrival Country: England
+Boarding Time: 4
+Departure Time: 5
+Estimate Arrival Time: 6
+Departure Date: 4
+Arrival Date: 4
+Economy Price: RM 4.0
+Business Price: RM 4.0Plane No= 4
+Number of Seat= 4
+
+Flight ID: F01
+Departure COuntry: Malaysia
+Arrival Country: China
+Boarding Time: 5
+Departure Time: 5
+Estimate Arrival Time: 5
+Departure Date: 5
+Arrival Date: 5
+Economy Price: RM 5.0
+Business Price: RM 5.0Plane No= 5
+Number of Seat= 6
+
+Flight ID: F01
+Departure COuntry: Malaysia
+Arrival Country: China
+Boarding Time: 4
+Departure Time: 4
+Estimate Arrival Time: 4
+Departure Date: 4
+Arrival Date: 4
+Economy Price: RM 4.0
+Business Price: RM 4.0Plane No= 4
+Number of Seat= 4
