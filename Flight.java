@@ -181,8 +181,9 @@ public class Flight {
         Scanner input = new Scanner(System.in);
         int numSeat;
         int indexOfFlight = -1;
-        System.out.println("Enter the Flight ID : ");
+        System.out.print("Enter the Flight ID : ");
         String searchID = input.nextLine();
+        System.out.println("");
         for (int i = 0; i < arrFlight.size(); i++) {
             if (arrFlight.get(i).flightID.equals(searchID)) {
                 numSeat = arrFlight.get(i).plane.getNumOfSeat();
@@ -200,9 +201,14 @@ public class Flight {
         for (int i = 1; i <= (NumberSeat / 4); i++) {
             System.out.printf("%d   ", i);
             for (int j = 0; j < 4; j++) {
-
+                
                 if (arrSeat.get(i).findSeatEmpty(arrSeat, (i * 10 + j), tFlight)) {
+                    if(arrSeat.get(i).getTypeOfSeat().equals("business")){
+                        System.out.print("*    ");
+                    }
+                    else{
                     System.out.print("o    ");
+                    }
                 } else {
                     System.out.print("x    ");
                 }
@@ -216,11 +222,16 @@ public class Flight {
     }
     
          public void defineSeat(ArrayList<Seat> arrSeat,Flight dFlight){
-         
+         //i=1 type = business
          for(int i=1;i<=(dFlight.getNumOfSeat()/4);i++){
              for(int j=0;j<4;j++){
-                 Seat dSeat = new Seat((i*10+j),"economics","Empty",dFlight);
+                 if(i==1){
+                     arrSeat.add(new Seat((i*10+j),"business","Empty",dFlight));
+                 }
+                 else {
+                 Seat dSeat = new Seat((i*10+j),"economy","Empty",dFlight);
                  arrSeat.add(dSeat);
+             }
              }
          }
 }
