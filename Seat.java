@@ -32,6 +32,22 @@ public class Seat {
     public void setStatusSeat(String statusSeat) {
         this.statusSeat = statusSeat;
     }
+
+    public int getSeatID() {
+        return seatID;
+    }
+
+    public String getTypeOfSeat() {
+        return typeOfSeat;
+    }
+
+    public String getStatusSeat() {
+        return statusSeat;
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
     
     
      
@@ -49,7 +65,16 @@ public class Seat {
              }
        return false;
    }
-          
+
+    public static Seat findSeat(ArrayList<Seat> arrSeat,ArrayList<Flight> arrFlight,int seatID,int bookFlight){
+        int successIndex = -1;
+        for(int i=0;i<arrSeat.size();i++){
+            if(arrSeat.get(i).getSeatID() == seatID && arrSeat.get(i).getFlight()== arrFlight.get(bookFlight)){
+                successIndex = i;
+            }
+        }
+        return arrSeat.get(successIndex);
+    }
 
 
     @Override
@@ -72,6 +97,19 @@ public class Seat {
         }
         return Objects.equals(this.flight, other.flight);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Seat{");
+        sb.append("seatID=").append(seatID);
+        sb.append(", typeOfSeat=").append(typeOfSeat);
+        sb.append(", statusSeat=").append(statusSeat);
+        sb.append(", flight=").append(flight);
+        sb.append('}');
+        return sb.toString();
+    }
+
     
 }
  

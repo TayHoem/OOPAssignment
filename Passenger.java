@@ -8,12 +8,24 @@ package assignment;
  *
  * @author ANG
  */
-public class Passenger {
-    private String passengerID;
+public class Passenger extends Person{
     private String passportNo;
 
-    public Passenger(String passengerID, String passportNo) {
-        this.passengerID = passengerID;
+    public Passenger(String passportNo, String name, String email, String phoneNumber, String gender) {
+        super(name, email, phoneNumber, gender);
+        this.passportNo = passportNo;
+    }
+    
+    public Passenger(String passportNo){
+        super("","","","");
+        this.passportNo = passportNo;
+    }
+
+ 
+
+
+
+    public void setPassportNo(String passportNo) {
         this.passportNo = passportNo;
     }
     
