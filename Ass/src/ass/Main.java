@@ -8,10 +8,8 @@ package ass;
  *
  * @author nicho
  */
-
 import java.util.Scanner;
 import java.util.ArrayList;
-
 
 public class Main {
 
@@ -74,23 +72,46 @@ public class Main {
             System.out.println("            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             System.out.println("            |1. Add Flight                |");
             System.out.println("            |2. Delete Flight             |");
-            System.out.println("            |3. View Flight               |");
+            System.out.println("            |3. Modify Flight Time        |");
+            System.out.println("            |4. View All Flight           |");
             System.out.println("            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             System.out.print("                  Enter your option: ");
             selection = sc.nextInt();
             int count = 0;
-            
+            char modify,addF,dltMore;
+
             if (selection == 1) {
-                Flight.addFlight(flights);
+                count=10;
+                do{
+                    count++;
+                    Flight.addFlight(flights, count);
+                    System.out.print("              Need to Add Flight? (Y/N): ");
+                addF = sc.next().charAt(0);
+
+        } while (addF == 'Y' || addF == 'y');
+                
+                
                 selection = 0;
             } else if (selection == 2) {
+                do{
                 Flight.dltFlight(flights);
+                 System.out.print("Do you want to delete another Flight?(Y=yes, N=no): ");
+            dltMore = sc.next().charAt(0);
+            sc.nextLine();
+            } while (dltMore == 'y' || dltMore == 'Y');
+                
                 selection = 0;
-            } else if (selection == 3) {
+            }else if (selection == 3) {
+                do{
+                Flight.modifyFlight(flights);
+                    System.out.print("Do you want to modify another Flight?(Y/y=yes, N/n=no): ");
+                    modify=sc.next().charAt(0);
+                }while(modify=='Y' || modify =='y');
+                selection = 0;
+            } else if (selection == 4) {
                 Flight.viewFlight(flights);
                 selection = 0;
             }
-
         } while (selection == 0);
 
     }

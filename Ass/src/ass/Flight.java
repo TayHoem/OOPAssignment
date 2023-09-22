@@ -8,8 +8,12 @@ package ass;
  *
  * @author nicho
  */
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+import java.util.regex.*;
 
 public class Flight {
 
@@ -43,6 +47,10 @@ public class Flight {
         this.bsPrice = bsPrice;
         this.plane = plane;
 
+    }
+
+    public Flight(Plane plane) {
+        this.plane = plane;
     }
 
     public String getFlightID() {
@@ -140,6 +148,25 @@ public class Flight {
     public void setPlane(Plane plane) {
         this.plane = plane;
     }
+    
+    
+    public static boolean isValidDateFormat(String date, String dateFormatPattern) {
+        Pattern pattern = Pattern.compile(dateFormatPattern);
+        Matcher matcher = pattern.matcher(date);
+        return matcher.matches();
+    }
+
+    public static boolean isValidDate(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.setLenient(false);
+
+        try {
+            sdf.parse(date);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
 
     public static String country(int country) {
         String countryName = "";
@@ -161,17 +188,20 @@ public class Flight {
         return countryName;
     }
 
-    public static void addFlight(ArrayList<Flight> flight) {
+    public static void addFlight(ArrayList<Flight> flight,int countFlight) {
 //        ArrayList<Flight> flight = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         char addF;
         int reinputCountry, dpCountry, arrCountry;
-        int countFlight = 10;
+        int  dpDateCount = 0;
+        String dateFormatPattern = "\\d{2}/\\d{2}/\\d{4}";
+        String arrDate, dpDate;
 
-        do {
+        
             int i = 0;
 //            System.out.print("Flight ID: ");
-            String fgID = "F0" + ++countFlight;
+            String fgID = "F0" + countFlight;
 
             System.out.println("\n                  Choose Country "
                     + "\n                   1.Japan"
@@ -193,53 +223,79 @@ public class Flight {
 
                 if (dpCountry < 1 || arrCountry < 1 || dpCountry > 5 || arrCountry > 5) {
                     reinputCountry = 1;
+                } else if (arrCountry == dpCountry) {
+                    System.out.println("![Connot travel to the same Country]!");
+                    reinputCountry = 1;
                 }
             } while (reinputCountry == 1);
 
             System.out.print("              Boarding Time(0100-2300): ");
             int bdTime = sc.nextInt();
 
-            System.out.print("              Departure Time(0100-2300): ");
-            int dpTime = sc.nextInt();
+            int dpTime;
+            do {
+                System.out.print("              Departure Time(0100-2300): ");
+                dpTime = sc.nextInt();
+                if (dpTime <= bdTime) {
+                    System.out.println("      [Depature Time must be different/earliear than Boarding Time...]\n              [Please re-enter] ");
+                }
+            } while (dpTime <= bdTime);
 
-            System.out.print("              Estimate Arrival Time(0100-2300): ");
-            int EsArrTime = sc.nextInt();
+            int esArrTime;
+            do {
+                System.out.print("              Estimate Arrival Time(0100-2300): ");
+                esArrTime = sc.nextInt();
+                if (esArrTime <= dpTime) {
+                    System.out.println("      [Estimation Arrival Time must be different/earli than Depature Time...]\n              [Please re-enter] ");
+                }
+            } while (esArrTime <= dpTime);
 
-            System.out.print("              Departure Date(dd/MM/yyyy): ");
-            String dpDate = sc.nextLine();
-            sc.nextLine();
+            do {
+                System.out.print("              Departure Date(dd/MM/yyyy): ");
+                dpDate = scanner.nextLine();
 
-            System.out.print("              Arrival Date(dd/MM/yyyy): ");
-            String arrDate = sc.nextLine();
+
+                if (!isValidDateFormat(dpDate, dateFormatPattern) || !isValidDate(dpDate)) {
+                    System.out.println("[Invalid date format. Please enter the date in dd/MM/yyyy format]");
+                }
+            } while (!isValidDateFormat(dpDate, dateFormatPattern) || !isValidDate(dpDate));
+
+            do {
+                System.out.print("              Arrival Date (dd/MM/yyyy): ");
+                arrDate = scanner.nextLine();
+
+                if (!isValidDateFormat(arrDate, dateFormatPattern) || !isValidDate(arrDate)) {
+                    System.out.println("[Invalid date format. Please enter the date in dd/MM/yyyy format]");
+                }
+            } while (!isValidDateFormat(arrDate, dateFormatPattern) || !isValidDate(arrDate));
 
             System.out.print("              Economic Price: RM");
             double ecoP = sc.nextDouble();
 
-            System.out.print("              Business Price: RM");
-            double busP = sc.nextDouble();
+            double busP;
+            do {
+                System.out.print("              Business Price: RM");
+                busP = sc.nextDouble();
+            } while (busP <= ecoP);
 
             System.out.print("              Plane No: ");
-            String planeNo = sc.nextLine();
-            sc.nextLine();
-
+            String planeNo = scanner.nextLine();
+            
             System.out.print("              Number of Seat: ");
-            int numOfSeat = sc.nextInt();
+            int numOfSeat=sc.nextInt();
 
-            Plane plane = new Plane(planeNo, numOfSeat);
+            Plane plane = new Plane(planeNo,numOfSeat);
             i++;
 
-            Flight flights = new Flight(fgID, Flight.country(dpCountry), Flight.country(arrCountry), bdTime, dpTime, EsArrTime, dpDate, arrDate, ecoP, busP, plane);
-            flight.add(flights);
-            System.out.print("              Add more Flight? (Y/N): ");
-            addF = sc.next().charAt(0);
-        } while (addF == 'Y' || addF == 'y');
-
-            System.out.println("                [Flight Updated...]");
-//        System.out.println("\n");
-//        for (Flight fli : flight) {
-//            System.out.println(fli);
-//        }
-    }
+            Flight flights = new Flight(fgID, Flight.country(dpCountry), Flight.country(arrCountry), bdTime, dpTime, esArrTime, dpDate, arrDate, ecoP, busP, plane);
+            System.out.print("Confirm to update this Flight?(Y=yes, N=no): ");
+            
+            char confirmUpdate = sc.next().charAt(0);
+            if (confirmUpdate == 'Y' || confirmUpdate == 'y') {
+                flight.add(flights);
+                System.out.println("                [Flight Updated...]");
+            } 
+        }
 
     public static void viewFlight(ArrayList<Flight> flight) {
         for (Flight fg : flight) {
@@ -249,22 +305,99 @@ public class Flight {
 
     public static void dltFlight(ArrayList<Flight> flight) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("          Which  Flight ID need to delete: F0");
-        int dltFg = sc.nextInt();
-        dltFg--;
+        int count = 0, found = 0;
+        char dltMore;
 
-        System.out.print("          Confirm delete?(Y=yes, N=no): ");
-        char confirmDlt = sc.next().charAt(0);
-        if (confirmDlt == 'Y' || confirmDlt == 'y') {
 
-            flight.remove(dltFg);
-            System.out.println("            ![Flight have been deleted]!");
-        }
+            System.out.print("Enter the Flight ID : ");
+            String searchID = sc.nextLine();
+            for (int i = 0; i < flight.size(); i++) {
+                if (flight.get(i).flightID.equals(searchID)) {
+                    System.out.println(flight.get(i));
+                    if(flight.get(i)!=null){
+                        found = 1;
+                        count = i;
+                    }else
+                        found=0;
+                    
+                    
+                }
+            }
+            if (found != 1) {
+                System.out.println("Can't find " + searchID);
+                found = 0;
+            }else if (found == 1) {
+                System.out.print("          Confirm delete?(Y=yes, N=no): ");
+                char confirmDlt = sc.next().charAt(0);
+                if (confirmDlt == 'Y' || confirmDlt == 'y') {
+
+                    flight.remove(count);
+                    System.out.println("            ![Flight have been deleted]!");
+                }
+            }
+
+        
+    }
+
+    public static void modifyFlight(ArrayList<Flight> flight) {
+        Scanner sc = new Scanner(System.in);
+        char again;
+
+ 
+            System.out.print("              Enter the Flight ID : ");
+            
+            String searchID = sc.nextLine();
+
+            int count = 0;
+
+            for (int i = 0; i < flight.size(); i++) {
+                if (flight.get(i).flightID.equals(searchID)) {
+                    System.out.println(flight.get(i));
+                    count = i;
+                }
+            }
+
+            System.out.println("                What you want to modify:");
+            System.out.println("                1. Boarding Time");
+            System.out.println("                2. Departure Time");
+            System.out.println("                3. Estimate Arrival Time\n");
+
+            System.out.print("              Select modify Time: ");
+            int modi = sc.nextInt();
+
+            if (modi == 1) {
+                System.out.println();
+                System.out.println("              Current Boarding Time(0100-2300): " + flight.get(count).bdTime);
+                System.out.print("              New Boarding Time(0100-2300): ");
+                int bTime = sc.nextInt();
+                flight.get(count).setBdTime(bTime);
+                System.out.println("");
+                System.out.println(flight.get(count));
+                System.out.println("[Flight Boarding Time have been modify...]");
+
+            } else if (modi == 2) {
+                System.out.println("              Current Departure Time(0100-2300): " + flight.get(count).dpTime);
+                System.out.print("              New Departure Time(0100-2300): ");
+                int dTime = sc.nextInt();
+                flight.get(count).setDpTime(dTime);
+                System.out.println("");
+                System.out.println(flight.get(count));
+                System.out.println("[Flight Departure Time have been modify...]");
+            } else if (modi == 3) {
+                System.out.println("              Current Estimate Arrival Time(0100-2300): " + flight.get(count).estimateArrivalTime);
+                System.out.print("              New Estimate Arrival Time(0100-2300): ");
+                int eaTime = sc.nextInt();
+                flight.get(count).setEstimateArrivalTime(eaTime);
+                System.out.println("");
+                System.out.println(flight.get(count));
+                System.out.println("[Flight Estimate Arrival Time have been modify...]");
+            }
 
     }
 
     @Override
-    public String toString() {
+
+   public String toString() {
         return "Flight ID: " + flightID
                 + "\nDeparture COuntry: " + dpCOuntry
                 + "\nArrival Country: " + arrCountry
@@ -277,4 +410,5 @@ public class Flight {
                 + "\nBusiness Price: RM " + bsPrice
                 + plane;
     }
+  
 }
