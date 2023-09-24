@@ -37,8 +37,8 @@ public class Plane {
     }
 
    public String toString(){
-       return "\nPlane No: "+ planeNo
-               +"\nNumber of Seat: "+ numOfSeat
-               +"\n\n";
+       return "\n               Plane No: "+ planeNo
+               +"\n               Number of Seat: "+ numOfSeat
+               +"\n";
    }
 }

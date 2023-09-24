@@ -59,12 +59,12 @@ public class Staff extends Person {
     }
 
     public String toString() {
-        return "Staff ID: " + staffId
-                + "\nStaff Position: " + position
-                + "\nStaff name: " + super.getName()
-                + "\nPhone No: " + super.getPhoneNo()
-                + "\nGender: " + super.getGender()
-                + "\nEmail: " + super.getEmail()
-                + "\nIc No: " + super.getIcNo();
+        return "               Staff ID: " + staffId
+                + "\n               Staff Position: " + position
+                + "\n               Staff name: " + super.getName()
+                + "\n               Phone No: " + super.getPhoneNo()
+                + "\n               Gender: " + super.getGender()
+                + "\n               Email: " + super.getEmail()
+                + "\n               Ic No: " + super.getIcNo();
     }
 }

@@ -15,11 +15,13 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         Staff[] staffArray = new Staff[10]; // You can adjust the size as needed
         int staffCount = 0, selection = 0;
         String notStaff = null;
         ArrayList<Flight> flights = new ArrayList<>();
         Plane plane = new Plane();
+        int toMenu = 0;
 
         flights.add(new Flight("F001", "Malaysia", "Japan", 1200, 1300, 2000, "11-02-2023", "12-02-2023", 200.00, 400.00, new Plane("PL04", 32)));
         flights.add(new Flight("F002", "Japan", "Malaysia", 1300, 1400, 1800, "13-02-2023", "14-02-2023", 300.00, 600.00, new Plane("PL05", 32)));
@@ -45,74 +47,86 @@ public class Main {
         staffArray[9] = new Staff("S000", "Airline Controller", 00000, "Juice hee", "014-4444444", 'F', "polipo@example.com", "040404-08-0918");
 
         do {
-            System.out.print("Enter Staff ID: ");
-            String stfID = sc.nextLine();
-            System.out.print("Enter Password (5-digit): ");
-            int stfpassword = sc.nextInt();
-            sc.nextLine();
+            do {
+                System.out.println("                    ===================");
+                System.out.println("                    |   STAFF LOG IN  |");
+                System.out.println("                    ===================");
+                System.out.print("                  Enter Staff ID: ");
+                String stfID = scanner.nextLine();
+                
+                System.out.print("                  Enter Password (5-digit): ");
+                int stfpassword = sc.nextInt();
+                sc.nextLine();
 
-            for (int i = 0; i < staffArray.length; i++) {
-                if (staffArray[i].login(stfID, stfpassword)) {
-                    staffCount = i;
-                    notStaff = stfID;
-                    break;
+                for (int i = 0; i < staffArray.length; i++) {
+                    if (staffArray[i].login(stfID, stfpassword)) {
+                        staffCount = i;
+                        notStaff = stfID;
+                        break;
+                    }
                 }
-            }
-            if (notStaff == null) {
-                System.out.println("![Invalid please Log in agian]!\n");
-            } else {
-                System.out.println("\n" + staffArray[staffCount].toString());
-            }
+                if (notStaff == null) {
+                    System.out.println("            ![Invalid please Log in agian]!\n");
+                } else {
+                    System.out.println("\n              ===================================");
+                    System.out.println("              |           STAFF DETAILS          |");
+                    System.out.println("              ===================================");
+                    System.out.println(staffArray[staffCount].toString());
+                    System.out.println("              ===================================\n");
+                }
 
-        } while (notStaff == null);
+            } while (notStaff == null);
 
-        do {
-            System.out.println("            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("            |         |STAFF MENU|        |");
-            System.out.println("            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("            |1. Add Flight                |");
-            System.out.println("            |2. Delete Flight             |");
-            System.out.println("            |3. Modify Flight Time        |");
-            System.out.println("            |4. View All Flight           |");
-            System.out.println("            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.print("                  Enter your option: ");
-            selection = sc.nextInt();
-            int count = 0;
-            char modify,addF,dltMore;
+            do {
+                System.out.println("                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                System.out.println("                |         |STAFF MENU|        |");
+                System.out.println("                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                System.out.println("                |1. Add Flight                |");
+                System.out.println("                |2. Delete Flight             |");
+                System.out.println("                |3. Modify Flight Time        |");
+                System.out.println("                |4. View All Flight           |");
+                System.out.println("                |0. To Exit                   |");
+                System.out.println("                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                System.out.print("                Enter your option: ");
+                selection = sc.nextInt();
+                int count = 0;
+                char modify, addF, dltMore;
 
-            if (selection == 1) {
-                count=10;
-                do{
-                    count++;
-                    Flight.addFlight(flights, count);
-                    System.out.print("              Need to Add Flight? (Y/N): ");
-                addF = sc.next().charAt(0);
+                if (selection == 1) {
+                    count = 10;
+                    do {
+                        count++;
+                        Flight.addFlight(flights, count);
+                        System.out.print("              Need to Add Flight? (Y/N): ");
+                        addF = sc.next().charAt(0);
+                    } while (addF == 'Y' || addF == 'y');
+                    selection = -1;
+                } else if (selection == 2) {
+                    do {
+                        Flight.dltFlight(flights);
+                        System.out.print("Do you want to delete another Flight?(Y=yes, N=no): ");
+                        dltMore = sc.next().charAt(0);
+                        sc.nextLine();
+                    } while (dltMore == 'y' || dltMore == 'Y');
 
-        } while (addF == 'Y' || addF == 'y');
-                
-                
-                selection = 0;
-            } else if (selection == 2) {
-                do{
-                Flight.dltFlight(flights);
-                 System.out.print("Do you want to delete another Flight?(Y=yes, N=no): ");
-            dltMore = sc.next().charAt(0);
-            sc.nextLine();
-            } while (dltMore == 'y' || dltMore == 'Y');
-                
-                selection = 0;
-            }else if (selection == 3) {
-                do{
-                Flight.modifyFlight(flights);
-                    System.out.print("Do you want to modify another Flight?(Y/y=yes, N/n=no): ");
-                    modify=sc.next().charAt(0);
-                }while(modify=='Y' || modify =='y');
-                selection = 0;
-            } else if (selection == 4) {
-                Flight.viewFlight(flights);
-                selection = 0;
-            }
-        } while (selection == 0);
+                    selection = -1;
+                } else if (selection == 3) {
+                    do {
+                        Flight.modifyFlight(flights);
+                        System.out.print("Do you want to modify another Flight?(Y/y=yes, N/n=no): ");
+                        modify = sc.next().charAt(0);
+                    } while (modify == 'Y' || modify == 'y');
+                    selection = -1;
+                } else if (selection == 4) {
+                    Flight.viewFlight(flights);
+                    selection = -1;
+                } else {
+                    selection = 0;
+                    toMenu = 1;
+                }
+
+            } while (selection == -1);
+        } while (toMenu == 1);
 
     }
 
