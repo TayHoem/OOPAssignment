@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class Payment {
     private int paymentID;  
@@ -98,13 +100,15 @@ public class Payment {
     @Override
     public String toString() {     
         if(this.paymentStatus == true){
-        return "\nPayment Success!!!\nPayment ID: "+ paymentID
-               +"\nDate: " + paymentDate
-               +"\nTime: " + paymentTime
-               +"\nBank: "+bankName
-               +"\nTotal Amount: RM "+ amount 
-               +"\nCard Number: "+cardNo
-               +"\nCV number: "+ cvNo;    
+        return  "\n================================\n|"+ bankName +"\t\t\t|\n|      Payment Success!!!      |\n|Payment ID: "+ paymentID
+               +"\t\t|\n|Date: " + paymentDate
+               +"\t\t|\n|Time: " + paymentTime
+               +"\t|\n|Total Amount: RM "+ amount 
+               +"\t|\n|Card Number: "+cardNo
+               +"\t|\n|CV number: "+ cvNo
+               +"\t\t\t|\n================================\n";  
+        
+        
         }
         else
         return "\nPayment Failed!!!\n Payment ID: "+ paymentID
@@ -131,14 +135,14 @@ public class Payment {
     
     public static boolean makePayment(ArrayList<Payment> payment,double amount){ 
         Scanner sc = new Scanner(System.in);
-        String cardNum;
+        String cardNum = null;
         char confirmPayment;
-        int cvNum;
-        int chooseBank;
-        String tempbankName; 
-        int length;
-        int correctFormat = 0;
+        int cvNum=0;
+        int chooseBank=0;
+        String tempbankName=null; 
+        int length = 0;
         int errYesNoCount = 0;
+        boolean valid = false;
         boolean vPayment;
         
         do{
@@ -156,49 +160,64 @@ public class Payment {
             System.out.printf("\n\nTotal Payment Amount: RM %.2f",amount);
 
             Payment.choosePay();
-                do{
+                     do{
+                 try{
                     System.out.print("Chosee Bank(1 to 3) :" );
                     chooseBank = sc.nextInt();
-                    switch(chooseBank){
-                case 1 :{
-                   tempbankName = "Public Bank";
+                        switch(chooseBank){
+                        case 1 :{
+                           tempbankName = "Public Bank";
+                        }
+                        break;
+                        case 2:{
+                            tempbankName = "MayBank";
+                        }
+                        break;
+                        case 3:{
+                            tempbankName = "Hong Leong Bank";  
+                        }
+                        break;
+                        default:{
+                            System.out.println("Wrong Select!!! Please only select 1,2 and 3\n");
+                            tempbankName= null;
+                        }
+                    } 
+                  }catch (Exception e) {
+                    System.out.println("      Alphabets Are Not Acceptable...Please input an Integer\n");
+                    sc.nextLine(); // Consume the invalid input to avoid an infinite loop
+                    chooseBank = 0;
+                  }
+                }while(chooseBank < 1 || chooseBank > 3);
 
-                }
-                break;
-                case 2:{
-                    tempbankName = "MayBank";
-                }
-                break;
-                case 3:{
-                    tempbankName = "Hong Leong Bank";  
-                }
-                break;
-                default:{
-                    System.out.println("Wrong Select!!! Please only select 1,2 and 3\n");
-                    tempbankName= "";
-                }
-                } 
-                }while(chooseBank < 0 || chooseBank > 3);
+              do{    
+                        System.out.print("Enter the card number :");
+                        cardNum = sc.next();
+                        length = String.valueOf(cardNum).length();
+                        Pattern pattern = Pattern.compile("^[0-9]+$");
+                        Matcher matcher = pattern.matcher(cardNum);
+                        
+                        valid = matcher.matches();
+                        if(valid == false){
+                            System.out.println("\nCard Number must got number only !!!");
+                        }
+                        
+                        if(length != 16){
+                        System.out.println("Wrong Format of card number!!! It should be 16 number\n");
+                        }
+                }while (length != 16 || !valid);
 
-                do{
-                    if(correctFormat > 0){
-                    System.out.println("\nWrong Format of card number!!! It should be 16 number\n");
+               do{
+                    try{
+                        System.out.print("Enter the CV Num :");
+                        cvNum = sc.nextInt();
+                        length = String.valueOf(cvNum).length();
+                        if(length != 3){
+                        System.out.println("Wrong Format of CV number!!! It should be 3 number only\n");
+                        }
+                    }catch (Exception e) {
+                        System.out.println("      Alphabets Are Not Acceptable...Please input an Integer\n");
+                        sc.nextLine();    // Consume the invalid input to avoid an infinite loop
                     }
-                    System.out.print("Enter the card number :");
-                    cardNum = sc.next();
-                    length = String.valueOf(cardNum).length();
-                    correctFormat++;
-                }while (length != 16);
-
-                correctFormat = 0;
-                do{
-                    if(correctFormat > 0){
-                    System.out.println("\nWrong Format of CV number!!! It should be 3 number only\n");
-                    }
-                    System.out.print("Enter the CV Num :");
-                    cvNum = sc.nextInt();
-                    length = String.valueOf(cvNum).length();
-                    correctFormat++;
                 }while(length != 3);
                 
                 do{
