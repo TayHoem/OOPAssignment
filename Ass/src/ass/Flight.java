@@ -214,6 +214,7 @@ public class Flight {
                 + "\n                   5.Australia");   //Input country 
 
         do {
+
             reinputCountry = 0;
             System.out.print("              Departure Country: ");
             dpCountry = sc.nextInt();
@@ -231,27 +232,66 @@ public class Flight {
                 reinputCountry = 1;
             }
         } while (reinputCountry == 1);
-
-        System.out.print("              Boarding Time(0100-2300): ");
-        int bdTime = sc.nextInt();
-
-        int dpTime;
+        int bdWord = 0, bdTime = 0;
         do {
-            System.out.print("              Departure Time(0100-2300): ");
-            dpTime = sc.nextInt();
-            if (dpTime <= bdTime) {
-                System.out.println("      [Depature Time must be different/earliear than Boarding Time...]\n              [Please re-enter] ");
+            try {
+                System.out.print("              Boarding Time(0100-2300): ");
+                bdTime = sc.nextInt();
+                if (bdTime < 100 || bdTime > 2300) {
+                    System.out.println("Invalid time format. Please enter a time between 0100 and 2300.\n");
+                    bdWord = 1;
+                } else {
+                    bdWord = 0;
+                }
+            } catch (Exception e) {
+                System.out.println("      Alphabets Are Not Acceptable...Please input an Integer\n");
+                sc.nextLine(); // Consume the invalid input to avoid an infinite loop
+                bdWord = 1;
             }
-        } while (dpTime <= bdTime);
+        } while (bdWord == 1);
 
-        int esArrTime;
+        int dpTime = 0, dpWord = 0;
         do {
-            System.out.print("              Estimate Arrival Time(0100-2300): ");
-            esArrTime = sc.nextInt();
-            if (esArrTime <= dpTime) {
-                System.out.println("      [Estimation Arrival Time must be different/earli than Depature Time...]\n              [Please re-enter] ");
+            try {
+                System.out.print("              Departure Time(0100-2300): ");
+                dpTime = sc.nextInt();
+                if (dpTime <= bdTime) {
+                    System.out.println("      [Depature Time must be different/earliear than Boarding Time...]\n              [Please re-enter]\n");
+                    dpWord = 1;
+                } else if (dpTime < 100 || dpTime > 2300) {
+                    System.out.println("Invalid time format. Please enter a time between 0100 and 2300.\n");
+                    dpWord = 1;
+                } else {
+                    dpWord = 0;
+                }
+            } catch (Exception e) {
+                System.out.println("      Alphabets Are Not Acceptable...Please input an Integer\n");
+                sc.nextLine(); // Consume the invalid input to avoid an infinite loop
+                dpWord = 1;
             }
-        } while (esArrTime <= dpTime);
+
+        } while (dpWord == 1);
+
+        int esArrTime = 0, esWord = 0;
+        do {
+            try {
+                System.out.print("              Estimate Arrival Time(0100-2300): ");
+                esArrTime = sc.nextInt();
+                if (esArrTime <= dpTime) {
+                    System.out.println("      [Estimation Arrival Time must be different/earli than Depature Time...]\n              [Please re-enter]\n");
+                    esWord = 1;
+                } else if (esArrTime < 100 || esArrTime > 2300) {
+                    System.out.println("Invalid time format. Please enter a time between 0100 and 2300.\n");
+                    esWord = 1;
+                } else {
+                    esWord = 0;
+                }
+            } catch (Exception e) {
+                System.out.println("      Alphabets Are Not Acceptable...Please input an Integer\n");
+                sc.nextLine(); // Consume the invalid input to avoid an infinite loop
+                esWord = 1;
+            }
+        } while (esWord == 1);
 
         Date dpD = new Date(), currentDate = new Date(), dpA = new Date();
         do {
@@ -292,17 +332,37 @@ public class Flight {
             }
         } while (!isValidDateFormat(arrDate, dateFormatPattern) || !isValidDate(arrDate) || dpA.before(currentDate));
 
-        System.out.print("              Economic Price: RM");
-        double ecoP = sc.nextDouble();
-
-        double busP;
+        double ecoP = 0, ecoWord = 0;
         do {
-            System.out.print("              Business Price: RM");
-            busP = sc.nextDouble();
-            if (busP <= ecoP) {
-                System.out.println("![Business price must expensive then Economic Price]!");
+            try {
+                System.out.print("              Economic Price: RM");
+                ecoP = sc.nextDouble();
+                ecoWord = 0;
+            } catch (Exception e) {
+                System.out.println("      Alphabets Are Not Acceptable...Please input an Integer\n");
+                sc.nextLine(); // Consume the invalid input to avoid an infinite loop
+                ecoWord = 1;
             }
-        } while (busP <= ecoP);
+        } while (ecoWord == 1);
+
+        double busP = 0, busWord = 0;
+        do {
+            try {
+                System.out.print("              Business Price: RM");
+                busP = sc.nextDouble();
+                if (busP <= ecoP) {
+                    System.out.println("![Business price must expensive then Economic Price]!");
+                    busWord = 1;
+                } else {
+                    busWord = 0;
+                }
+            } catch (Exception e) {
+                System.out.println("      Alphabets Are Not Acceptable...Please input an Integer\n");
+                sc.nextLine(); // Consume the invalid input to avoid an infinite loop
+                busWord = 1;
+            }
+
+        } while (busWord == 1);
 
         System.out.print("              Plane No: ");
         String planeNo = scanner.nextLine();
@@ -379,31 +439,60 @@ public class Flight {
         String searchID = sc.nextLine();
         System.out.println("\n              =============== Flight =============\n");
 
-        int count = 0,noCount=0;
+        int count = 0, noCount = 0;
 
         for (int i = 0; i < flight.size(); i++) {
             if (flight.get(i).flightID.equals(searchID)) {
                 System.out.println(flight.get(i));
                 System.out.println("              ====================================");
                 count = i;
-            }else 
+            } else {
                 noCount++;
+            }
         }
+        int modi = 0, modiWord = 0;
 
-        if (noCount!=flight.size()) {
+        if (noCount != flight.size()) {
             System.out.println("                What you want to modify:");
             System.out.println("                1. Boarding Time");
             System.out.println("                2. Departure Time");
             System.out.println("                3. Estimate Arrival Time\n");
+            do {
+                try {
+                    System.out.print("              Select modify Time: ");
+                    modi = sc.nextInt();
+                    modiWord = 0;
+                } catch (Exception e) {
+                    System.out.println("      Alphabets Are Not Acceptable...Please input an Integer\n");
+                    sc.nextLine(); // Consume the invalid input to avoid an infinite loop
+                    modiWord = 1;
+                }
+            } while (modiWord == 1);
 
-            System.out.print("              Select modify Time: ");
-            int modi = sc.nextInt();
-
+            int bTime = 0, bWord = 0, dTime = 0, dWord = 0, eaTime = 0, eaWord = 0;
             if (modi == 1) {
                 System.out.println();
                 System.out.println("              => Current Boarding Time(0100-2300): " + flight.get(count).bdTime);
-                System.out.print("                 Enter New Boarding Time(0100-2300): ");
-                int bTime = sc.nextInt();
+                do {
+                    try {
+                        System.out.print("                 Enter New Boarding Time(0100-2300): ");
+                        bTime = sc.nextInt();
+                        bWord = 0;
+                        if (bTime >= flight.get(count).dpTime) {
+                            System.out.println("Boarding Time Cannot Be After/Same With Departure Time\n");
+                            bWord = 1;
+                        } else if (bTime < 100 || bTime > 2300) {
+                            System.out.println("Invalid time format. Please enter a time between 0100 and 2300.\n");
+                            bWord = 1;
+                        } else {
+                            bWord = 0;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("      Alphabets Are Not Acceptable...Please input an Integer\n");
+                        sc.nextLine(); // Consume the invalid input to avoid an infinite loop
+                        bWord = 1;
+                    }
+                } while (bWord == 1);
                 flight.get(count).setBdTime(bTime);
                 System.out.println("");
                 System.out.println("\n              ========== Modified Flight ========\n");
@@ -412,10 +501,32 @@ public class Flight {
                 System.out.println("           [Flight Boarding Time have been modify...]");
 
             } else if (modi == 2) {
+
                 System.out.println();
                 System.out.println("              => Current Departure Time(0100-2300): " + flight.get(count).dpTime);
-                System.out.print("                 Enter New Departure Time(0100-2300): ");
-                int dTime = sc.nextInt();
+                do {
+                    try {
+                        System.out.print("                 Enter New Departure Time(0100-2300): ");
+                        dTime = sc.nextInt();
+                        dWord = 0;
+                        if (dTime >= flight.get(count).estimateArrivalTime) {
+                            System.out.println("Boarding Time Cannot Be After/Same With Estiated Arrival Time\n");
+                            dWord = 1;
+                        } else if (dTime <= flight.get(count).bdTime) {
+                            System.out.println("Boarding Time Cannot Be Before/Same With Boarding\n");
+                            dWord = 1;
+                        } else if (dTime < 100 || dTime > 2300) {
+                            System.out.println("Invalid time format. Please enter a time between 0100 and 2300.\n");
+                            dWord = 1;
+                        } else {
+                            dWord = 0;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("      Alphabets Are Not Acceptable...Please input an Integer\n");
+                        sc.nextLine(); // Consume the invalid input to avoid an infinite loop
+                        dWord = 1;
+                    }
+                } while (dWord == 1);
                 flight.get(count).setDpTime(dTime);
                 System.out.println("");
                 System.out.println("\n              ========== Modified Flight ========\n");
@@ -425,8 +536,26 @@ public class Flight {
             } else if (modi == 3) {
                 System.out.println();
                 System.out.println("              => Current Estimate Arrival Time(0100-2300): " + flight.get(count).estimateArrivalTime);
-                System.out.print("                 Enter New Estimate Arrival Time(0100-2300): ");
-                int eaTime = sc.nextInt();
+                do {
+                    try {
+                        System.out.print("                 Enter New Estimate Arrival Time(0100-2300): ");
+                        eaTime = sc.nextInt();
+                        eaWord = 0;
+                        if (eaTime <= flight.get(count).dpTime) {
+                            System.out.println("Boarding Time Cannot Be Before Departure/Boarding Time...\n");
+                            eaWord = 1;
+                        } else if (eaTime < 100 || eaTime > 2300) {
+                            System.out.println("Invalid time format. Please enter a time between 0100 and 2300.\n");
+                            eaWord = 1;
+                        } else {
+                            eaWord = 0;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("      Alphabets Are Not Acceptable...Please input an Integer\n");
+                        sc.nextLine(); // Consume the invalid input to avoid an infinite loop
+                        eaWord = 1;
+                    }
+                } while (eaWord == 1);
                 flight.get(count).setEstimateArrivalTime(eaTime);
                 System.out.println("");
                 System.out.println("\n              ========== Modified Flight ========\n");
@@ -435,7 +564,7 @@ public class Flight {
                 System.out.println("           [Flight Estimate Arrival Time have been modify...]");
             }
         } else {
-            System.out.println("                Can't Find Flight");
+            System.out.println("                Can't Find Flight " + searchID);
             System.out.println("\n              ====================================");
         }
 
@@ -444,10 +573,10 @@ public class Flight {
     @Override
 
     public String toString() {
-        return  "           ^^==================================^^"
-                +"\n           ||               "+ flightID +"               ||"
-                +"\n           ^^==================================^^"
-                +"\n               Flight ID: " + flightID
+        return "           ^^==================================^^"
+                + "\n           ||               " + flightID + "               ||"
+                + "\n           ^^==================================^^"
+                + "\n               Flight ID: " + flightID
                 + "\n               Departure Country: " + dpCOuntry
                 + "\n               Arrival Country: " + arrCountry
                 + "\n               Boarding Time: " + bdTime
