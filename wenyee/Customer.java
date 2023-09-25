@@ -96,21 +96,33 @@ public class Customer extends Person {
 
     public ArrayList bookingTicket(ArrayList<Seat> arrSeat, ArrayList<Flight> arrFlight, int bookFlight, Customer tcustomer) {
         Scanner input = new Scanner(System.in);
-        char isContinue;
+        char isContinue = 'N';
+        boolean isdigit =false;
+        boolean invalid = true;
         String tempName, tempPassport, tempPhoneNo;
-        int tempSeatID;
+        int tempSeatID=0;
         ArrayList<Ticket> tempArrTicket = new ArrayList<Ticket>();
         tempArrTicket.clear();
         Passenger validpassenger = new Passenger();
         //Passenger tempPassenger = new Passenger("");
+        
         do {
             System.out.println("                Seat ID = xy(x = row , y = column)          ");
             System.out.println("");
+            
             do {
+                try{
                 System.out.print("              Enter your Seat ID                  : ");
                 tempSeatID = input.nextInt();
+
+            }catch(Exception E){
+                    
+                    }
+                isdigit = Seat.validSeatID(arrSeat, arrFlight, tempSeatID, bookFlight);
                 input.nextLine();
-            } while (!Seat.validSeatID(arrSeat, arrFlight, tempSeatID, bookFlight));
+            } while (!isdigit);
+             
+
                 //turn status to selected
             do {
                 System.out.print("              Enter the Passenger Name            : ");
@@ -130,11 +142,18 @@ public class Customer extends Person {
             Passenger tempPassenger = new Passenger(tempPassport, tempName, "", tempPhoneNo, "");
             Seat tempSeat = Seat.findSeat(arrSeat, arrFlight, tempSeatID, bookFlight);
             tempArrTicket.add(new Ticket(tempSeat, tempPassenger, tcustomer));
-
+           
+            do{
             System.out.printf("\n\n");
+             invalid = false;
+            try{
             System.out.print("              Are you want to buy another ticket in the same Flight?(Y/N) :");
             isContinue = Character.toUpperCase(input.nextLine().charAt(0));
-           
+            }catch(Exception e){
+                System.out.println("                Invalid Respond. Please enter Y or N ");
+                invalid = true;
+            }
+            }while(invalid);
            
         } while (isContinue == 'Y');
         Seat.returnEmpty(arrSeat);
@@ -167,7 +186,7 @@ public class Customer extends Person {
     public static boolean continueBooking() {
         Scanner input = new Scanner(System.in);
         System.out.print("              Are you continue to booking ? (Y = yes / N = no) : ");
-        char respond = Character.toUpperCase(input.nextLine().charAt(0));
+        char respond = Character.toUpperCase(input.next().charAt(0));
         if (respond == 'Y') {
             return true;
         } else {
@@ -194,7 +213,7 @@ public class Customer extends Person {
             }
         }
         if(success == 0){
-            System.out.printf("\n               You have book any ticket.\n");
+            System.out.printf("\n                    You have not book any ticket yet.....\n");
         }
     }
         
