@@ -100,13 +100,13 @@ public class Payment {
     @Override
     public String toString() {     
         if(this.paymentStatus == true){
-        return  "\n================================\n|"+ bankName +"\t\t\t|\n|      Payment Success!!!      |\n|Payment ID: "+ paymentID
+        return  "\n=================================\n|"+ bankName +"\t\t\t|\n|      Payment Success!!!       |\n|Payment ID: "+ paymentID
                +"\t\t|\n|Date: " + paymentDate
                +"\t\t|\n|Time: " + paymentTime
                +"\t|\n|Total Amount: RM "+ amount 
-               +"\t|\n|Card Number: "+cardNo
+               +"\t\t|\n|Card Number: "+cardNo
                +"\t|\n|CV number: "+ cvNo
-               +"\t\t\t|\n================================\n";  
+               +"\t\t\t|\n=================================\n";  
         
         
         }
@@ -162,7 +162,7 @@ public class Payment {
             Payment.choosePay();
                      do{
                  try{
-                    System.out.print("Chosee Bank(1 to 3) :" );
+                    System.out.print("        Chosee Bank(1 to 3) :" );
                     chooseBank = sc.nextInt();
                         switch(chooseBank){
                         case 1 :{
@@ -190,7 +190,7 @@ public class Payment {
                 }while(chooseBank < 1 || chooseBank > 3);
 
               do{    
-                        System.out.print("Enter the card number :");
+                        System.out.print("        Enter the card number :");
                         cardNum = sc.next();
                         length = String.valueOf(cardNum).length();
                         Pattern pattern = Pattern.compile("^[0-9]+$");
@@ -208,7 +208,7 @@ public class Payment {
 
                do{
                     try{
-                        System.out.print("Enter the CV Num :");
+                        System.out.print("        Enter the CV Num :");
                         cvNum = sc.nextInt();
                         length = String.valueOf(cvNum).length();
                         if(length != 3){

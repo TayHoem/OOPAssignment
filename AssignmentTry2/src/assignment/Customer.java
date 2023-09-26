@@ -164,6 +164,8 @@ public class Customer extends Person {
 
 
     public boolean booking(ArrayList<Flight> flights, ArrayList<Seat> arrSeat, ArrayList<Payment> arrPayment, ArrayList<Ticket> arrTicket, Customer customer1) {
+        Scanner input = new Scanner(System.in);
+        char respond;
         ArrayList<Ticket> tempTckt = new ArrayList<Ticket>();
 
         System.out.println("                +=========================================+");
@@ -173,7 +175,13 @@ public class Customer extends Person {
         System.out.println("                +=========================================+");
         System.out.printf("\n\n");
             
-        int indexBookFlight = Flight.displayFlight(flights, arrSeat);     
+        int indexBookFlight = Flight.displayFlight(flights, arrSeat);   
+        do{
+        System.out.print("Continue to book ticket on this flight?(Y=yes/N=no) :");
+         respond = Character.toUpperCase(input.next().charAt(0));
+          
+        if(respond == 'Y'){
+        
         tempTckt = customer1.bookingTicket(arrSeat, flights, indexBookFlight, customer1);     
         
         double totalPayment = Payment.calcPayment(tempTckt);
@@ -182,7 +190,16 @@ public class Customer extends Person {
             //System.out.println(tempTckt.get(0).toString());
             Ticket.generateTicket(arrTicket, tempTckt);
         }
-        return true;
+        
+        }
+        else if(respond == 'N'){
+            System.out.println("You will reset the booking process.");
+        }
+        else {
+            System.out.println("Please select Y or N only!");
+        }
+        }while( respond !='Y' &&respond !='N');
+         return true;
     }
 
     public static boolean continueBooking() {

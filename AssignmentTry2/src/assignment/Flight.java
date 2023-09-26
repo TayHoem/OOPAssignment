@@ -194,7 +194,7 @@ public class Flight {
         Scanner sc = new Scanner(System.in);
         Scanner scanner = new Scanner(System.in);
         char addF;
-        int reinputCountry, dpCountry=0, arrCountry;
+        int reinputCountry, dpCountry=0, arrCountry = 0;
         int dpDateCount = 0;
         String dateFormatPattern = "\\d{2}/\\d{2}/\\d{4}";
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -237,19 +237,33 @@ public class Flight {
                 dpCountryWord = 1;
                 }
             }while(dpCountryWord==1);
-             
+            
+            int arrCountryWord = 0 ;
+            
+            do{
+               
+                try{
+                System.out.print("              Arrival Country: ");
+                arrCountry = sc.nextInt();
+                Flight.country(arrCountry);
+                sc.nextLine();
 
-            System.out.print("              Arrival Country: ");
-            arrCountry = sc.nextInt();
-            Flight.country(arrCountry);
-            sc.nextLine();
-
-            if (dpCountry < 1 || arrCountry < 1 || dpCountry > 5 || arrCountry > 5) {
-                reinputCountry = 1;
-            } else if (arrCountry == dpCountry) {
-                System.out.println("![Connot travel to the same Country]!");
-                reinputCountry = 1;
-            }
+                    if (dpCountry < 1 || arrCountry < 1 || dpCountry > 5 || arrCountry > 5) {
+                        reinputCountry = 1;
+                    } else if (arrCountry == dpCountry) {
+                        System.out.println("![Connot travel to the same Country]!");
+                        reinputCountry = 1;
+                    }else{
+                        arrCountryWord = 0;
+                        reinputCountry = 0;
+                    }
+                }catch (Exception e) {
+                    System.out.println("      Alphabets Are Not Acceptable...Please input an Integer\n");
+                    sc.nextLine(); // Consume the invalid input to avoid an infinite loop
+                    arrCountryWord = 1;
+                }
+                
+            } while(arrCountryWord == 1);
         } while (reinputCountry == 1);
         
         do {
@@ -380,7 +394,6 @@ public class Flight {
                 sc.nextLine(); // Consume the invalid input to avoid an infinite loop
                 busWord = 1;
             }
-
         } while (busWord == 1);
 
         System.out.print("              Plane No: ");
