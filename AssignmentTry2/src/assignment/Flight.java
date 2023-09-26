@@ -194,13 +194,19 @@ public class Flight {
         Scanner sc = new Scanner(System.in);
         Scanner scanner = new Scanner(System.in);
         char addF;
-        int reinputCountry, dpCountry, arrCountry;
+        int reinputCountry, dpCountry=0, arrCountry;
         int dpDateCount = 0;
         String dateFormatPattern = "\\d{2}/\\d{2}/\\d{4}";
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String arrDate, dpDate;
-
         int i = 0;
+        int bdWord = 0, bdTime = 0;
+        int dpTime = 0, dpWord = 0;
+        int esArrTime = 0, esWord = 0;
+        Date dpD = new Date(), currentDate = new Date(), dpA = new Date();
+        double ecoP = 0, ecoWord = 0;
+        double busP = 0, busWord = 0;
+        int numOfSeat=0,numOFSeatWord=0;
 
         String fgID = "F0" + countFlight;
 
@@ -214,12 +220,24 @@ public class Flight {
                 + "\n                   4.China"
                 + "\n                   5.Australia");   //Input country 
 
+        int dpCountryWord=0;
         do {
-
-            reinputCountry = 0;
+            do{
+                reinputCountry = 0;
+                try{
+            
             System.out.print("              Departure Country: ");
-            dpCountry = sc.nextInt();
-            Flight.country(dpCountry);
+            dpCountry = sc.nextInt(); 
+                            Flight.country(dpCountry);
+
+            dpCountryWord=0;
+                }catch (Exception e) {
+                System.out.println("      Alphabets Are Not Acceptable...Please input an Integer\n");
+                sc.nextLine(); // Consume the invalid input to avoid an infinite loop
+                dpCountryWord = 1;
+                }
+            }while(dpCountryWord==1);
+             
 
             System.out.print("              Arrival Country: ");
             arrCountry = sc.nextInt();
@@ -233,7 +251,7 @@ public class Flight {
                 reinputCountry = 1;
             }
         } while (reinputCountry == 1);
-        int bdWord = 0, bdTime = 0;
+        
         do {
             try {
                 System.out.print("              Boarding Time(0100-2300): ");
@@ -251,7 +269,7 @@ public class Flight {
             }
         } while (bdWord == 1);
 
-        int dpTime = 0, dpWord = 0;
+        
         do {
             try {
                 System.out.print("              Departure Time(0100-2300): ");
@@ -273,7 +291,7 @@ public class Flight {
 
         } while (dpWord == 1);
 
-        int esArrTime = 0, esWord = 0;
+        
         do {
             try {
                 System.out.print("              Estimate Arrival Time(0100-2300): ");
@@ -294,7 +312,7 @@ public class Flight {
             }
         } while (esWord == 1);
 
-        Date dpD = new Date(), currentDate = new Date(), dpA = new Date();
+        
         do {
             System.out.print("              Departure Date(dd/MM/yyyy): ");
             dpDate = scanner.nextLine();
@@ -333,7 +351,7 @@ public class Flight {
             }
         } while (!isValidDateFormat(arrDate, dateFormatPattern) || !isValidDate(arrDate) || dpA.before(currentDate));
 
-        double ecoP = 0, ecoWord = 0;
+        
         do {
             try {
                 System.out.print("              Economic Price: RM");
@@ -346,7 +364,7 @@ public class Flight {
             }
         } while (ecoWord == 1);
 
-        double busP = 0, busWord = 0;
+        
         do {
             try {
                 System.out.print("              Business Price: RM");
@@ -367,9 +385,18 @@ public class Flight {
 
         System.out.print("              Plane No: ");
         String planeNo = scanner.nextLine();
-
+        
+        do{
+        try{
         System.out.print("              Number of Seat: ");
-        int numOfSeat = sc.nextInt();
+        numOfSeat = sc.nextInt();
+        numOFSeatWord=0;
+        }catch (Exception e) {
+                System.out.println("      Alphabets Are Not Acceptable...Please input an Integer\n");
+                sc.nextLine(); // Consume the invalid input to avoid an infinite loop
+                numOFSeatWord = 1;
+            }
+        }while(numOFSeatWord==1);
 
         Plane plane = new Plane(planeNo, numOfSeat);
         i++;

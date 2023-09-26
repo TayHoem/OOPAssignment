@@ -52,12 +52,9 @@ public class Seat {
 
     public boolean findSeatEmpty(ArrayList<Seat> arrSeat, int id, Flight flight) {
         boolean valid = false;
-        Seat fSeat = new Seat(0, "economy", "Empty", flight);
-        Seat fSeat2 = new Seat(0, "business", "Empty", flight);
-        fSeat.setSeatID(id);
-        fSeat2.setSeatID(id);
+
         for (int i = 0; i < arrSeat.size(); i++) {
-            if (arrSeat.get(i).equals(fSeat) || arrSeat.get(i).equals(fSeat2)) {
+            if (arrSeat.get(i).seatID == id && arrSeat.get(i).statusSeat.equalsIgnoreCase("Empty") && arrSeat.get(i).getFlight().getFlightID().equalsIgnoreCase(flight.getFlightID())) {
                 valid = true;
             }
         }
@@ -124,7 +121,7 @@ public class Seat {
         boolean valid = false;
         int successFind =0;
         for (int i = 0; i < arrSeat.size(); i++) {
-            if (arrSeat.get(i).seatID == searchSeat  && arrFlight.get(bookFlightIndex).equals(arrSeat.get(i).getFlight())) {
+            if (arrSeat.get(i).seatID == searchSeat  && arrFlight.get(bookFlightIndex).getFlightID().equals(arrSeat.get(i).getFlight().getFlightID())) {
                 successFind++;
                 if (arrSeat.get(i).getStatusSeat().equalsIgnoreCase("Empty")) {
                     valid = true;
