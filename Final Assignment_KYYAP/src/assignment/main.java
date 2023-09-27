@@ -43,17 +43,17 @@ public class main {
 
 
         // Populate the array with staff members
-        staffArray[0] = new Staff("S001", "Manager", 11111, "Apple Doe", "015-5555555", "MALE", "john@example.com", "030402-07-1526");
-        staffArray[1] = new Staff("S002", "Airline Controller", 22222, "Bun Smith", "012-345678", "FEMALE", "jane@example.com", "040222-08-0437");
-        staffArray[2] = new Staff("S003", "Airline Controller", 33333, "Coocies Johnson", "014-567890", "MALE", "bob@example.com", "02222-18-1234");
-        staffArray[3] = new Staff("S004", "Airline Controller", 44444, "Duck Brown", "019-7899908", "FEMALE", "alice@example.com", "191203-18-8768");
-        staffArray[4] = new Staff("S005", "Airline Controller", 55555, "Egg Lee", "013-2727589", "MALE", "eva@example.com", "170807-14-9087");
-        staffArray[5] = new Staff("S006", "Airline Controller", 66666, "Fruit Chan", "019-9999999", "FEMALE", "owom@example.com", "020405-09-8967");
-        staffArray[6] = new Staff("S007", "Airline Controller", 77777, "Grass wong", "018-7976902", "MALE", "pema@example.com", "010917-08-7869");
-        staffArray[7] = new Staff("S008", "Airline Controller", 88888, "Ham chan", "017-7787960", "FEMALE", "sosy@example.com", "010416-11-1996");
-        staffArray[8] = new Staff("S009", "Airline Controller", 99999, "Ice loo", "0197891111", "MALE", "kokonut@example.com", "111111-01-1111");
-        staffArray[9] = new Staff("S000", "Airline Controller", 00000, "Juice hee", "014-4444444", "FEMALE", "polipo@example.com", "040404-08-0918");
-
+        staffArray[0] = new Staff("S001", "Manager", 11111, "Apple Doe", "015-5555555", "MALE", "john@example.com");
+        staffArray[1] = new Staff("S002", "Airline Controller", 22222, "Bun Smith", "012-345678", "FEMALE", "jane@example.com");
+        staffArray[2] = new Staff("S003", "Airline Controller", 33333, "Coocies Johnson", "014-567890", "MALE", "bob@example.com");
+        staffArray[3] = new Staff("S004", "Airline Controller", 44444, "Duck Brown", "019-7899908", "FEMALE", "alice@example.com");
+        staffArray[4] = new Staff("S005", "Airline Controller", 55555, "Egg Lee", "013-2727589", "MALE", "eva@example.com");
+        staffArray[5] = new Staff("S006", "Airline Controller", 66666, "Fruit Chan", "019-9999999", "FEMALE", "owom@example.com");
+        staffArray[6] = new Staff("S007", "Airline Controller", 77777, "Grass wong", "018-7976902", "MALE", "pema@example.com");
+        staffArray[7] = new Staff("S008", "Airline Controller", 88888, "Ham chan", "017-7787960", "FEMALE", "sosy@example.com");
+        staffArray[8] = new Staff("S009", "Airline Controller", 99999, "Ice loo", "0197891111", "MALE", "kokonut@example.com");
+        staffArray[9] = new Staff("S000", "Airline Controller", 00000, "Juice hee", "014-4444444", "FEMALE", "polipo@example.com");
+        
         Customer cust1 = new Customer("040225-14-1143", "12345678", "KY YAP", "kyyap@gmail.com", "011-0818007", "Male");
         Customer cust2 = new Customer("981024-13-1985", "24681012", "Mei Ling", "123@gmail.com", "012-3456789", "Female");
         Customer cust3 = new Customer("030908-10-1983", "13579138", "Kim Ho", "secret@gmail.com", "018-2432320", "Male");
