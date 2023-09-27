@@ -353,6 +353,7 @@ public class Customer extends Person {
     }
 
     public boolean displayTicket(ArrayList<Ticket> arrTicket) {
+        Scanner input = new Scanner(System.in);
         int success = 0;
         System.out.println("                +=========================================+");
         System.out.println("                |                                         |");
@@ -373,6 +374,9 @@ public class Customer extends Person {
         if (success == 0) {
             System.out.printf("\n                    You have not book any ticket yet.....\n");
         }
+         System.out.println("");
+        System.out.print("Enter any key to back to main menu : ");
+          char nothing = input.next().charAt(0);
         return true;
     }
 
