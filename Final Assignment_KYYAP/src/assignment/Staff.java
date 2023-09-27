@@ -17,12 +17,12 @@ public class Staff extends Person {
     private String position;
     private int stfPass;
 
-    public Staff(String name, String phoneNo, String gender, String email, String icNo) {
-        super(name, phoneNo, gender, email, icNo);
+    public Staff(String name, String phoneNo, String gender, String email) {
+        super(name, phoneNo, gender, email);
     }
 
-    public Staff(String staffId, String position, int stfpass, String name, String phoneNo, String gender, String email, String icNo) {
-        super(name, phoneNo, gender, email, icNo);
+    public Staff(String staffId, String position, int stfpass, String name, String phoneNo, String gender, String email) {
+        super(name, phoneNo, gender, email);
         this.staffId = staffId;
         this.position = position;
         this.stfPass = stfpass;
@@ -65,8 +65,7 @@ public class Staff extends Person {
                 + "\n               Staff name: " + super.getName()
                 + "\n               Phone No: " + super.getPhoneNumber()
                 + "\n               Gender: " + super.getGender()
-                + "\n               Email: " + super.getEmail()
-                + "\n               Ic No: " + super.getIcNo();
+                + "\n               Email: " + super.getEmail();
     }
     
     
