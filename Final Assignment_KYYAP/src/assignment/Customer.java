@@ -22,11 +22,11 @@ public class Customer extends Person {
     private String custPassword;
 
     public Customer(String name, String email, String phoneNumber, String gender) {
-        super(name, email, phoneNumber, gender);
+        super(name, phoneNumber,gender,email );
     }
 
     public Customer(String custIcNo, String custPassword, String name, String email, String phone, String gender) {
-        super(name, email, phone, gender);
+        super(name, phone,gender,email);
         this.custIcNo = custIcNo;
         this.custPassword = custPassword;
     }
