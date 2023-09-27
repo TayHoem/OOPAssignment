@@ -42,12 +42,10 @@ public class main {
         flights.add(new Flight("F008", "Japan", "Australia", 1300, 1400, 2200, "10/12/2023", "11/12/2023", 300.00, 600.00, new Plane("PL11", 36)));
         flights.add(new Flight("F009", "Australia", "Japan", 1200, 1500, 2100, "13/12/2023", "14/12/2023", 200.00, 500.00, new Plane("PL01", 36)));
         flights.add(new Flight("F010", "Malaysia", "Malaysia", 1100, 1200, 2100, "20/12/2023", "21/12/2023", 100.00, 400.00, new Plane("PL07", 32)));
-        System.out.println(flights.size());
-        System.out.println(arrSeat.size());
         for (int i = 0; i < flights.size(); i++) {
             flights.get(i).defineSeat(arrSeat, flights.get(i));
         }
-        System.out.println(arrSeat.size());
+
 
         // Populate the array with staff members
         staffArray[0] = new Staff("S001", "Manager", 11111, "Apple Doe", "015-5555555", "MALE", "john@example.com", "030402-07-1526");
