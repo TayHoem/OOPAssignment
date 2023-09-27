@@ -145,6 +145,7 @@ public class main {
                                     case 5:
                                         System.out.println("                You have logout.");
                                         back = false;
+                                        book = 'Y';
                                         break;
                                     default:
                                         System.out.printf("     Input is not in the action list...Please select again!!!\n\n", choose);
@@ -152,6 +153,7 @@ public class main {
                                 }
                             } while (choose < 1 || choose > 5);
                         } while (book == 'N' || back == true);
+                        break;
                     }
                     chooseUser = 0;
                     break;
