@@ -16,22 +16,13 @@ public abstract class Person {
     private String phoneNumber;
     private String gender;
     private String email;
-    private String icNo;
 
-    public Person(String name, String phoneNumber, String gender, String email, String icNo) {
+   public Person(String name, String phoneNumber, String gender, String email) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.email = email;
-        this.icNo = icNo;
-    }
-    
-     public Person(String name, String email, String phoneNumber, String gender) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.gender = gender;
-        this.email = email;
-    }
+    }    
 
     public void setName(String name) {
         this.name = name;
@@ -49,9 +40,6 @@ public abstract class Person {
         this.email = email;
     }
 
-    public void setIcNo(String icNo) {
-        this.icNo = icNo;
-    }
 
     public String getName() {
         return name;
@@ -67,10 +55,6 @@ public abstract class Person {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getIcNo() {
-        return icNo;
     }
 
     public boolean getValidName(String name) {
