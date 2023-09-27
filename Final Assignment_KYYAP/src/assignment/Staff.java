@@ -59,6 +59,7 @@ public class Staff extends Person {
         return false;
     }
 
+     @Override
     public String toString() {
         return "               Staff ID: " + staffId
                 + "\n               Staff Position: " + position
