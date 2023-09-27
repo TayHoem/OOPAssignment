@@ -50,7 +50,6 @@ public class Ticket implements Cloneable{
     }
 
     public void ticketDisplay(Ticket ticket){
-     Scanner input = new Scanner(System.in);
       //  return "Ticket{" + "seat=" + seat + ", passenger=" + passenger + ", customer=" + customer + '}';
         System.out.printf("             %-10s: %-35s\n","Name ",ticket.getPassenger().getName());
         System.out.printf("             %-10s: %-10s\n","Passport ",ticket.getPassenger().getPassportNo());
@@ -61,9 +60,6 @@ public class Ticket implements Cloneable{
         System.out.printf("             %-8s\t%-5s\t%-10s\t%-10s\n","Flight","Seat","Class","Board Till");
         System.out.printf("             --------\t-----\t----------\t----------\n");
         System.out.printf("             %-8s\t%-5s\t%-10s\t%04d\n",ticket.getSeat().getFlight().getFlightID(),ticket.getSeat().getSeatID(),ticket.getSeat().getTypeOfSeat(),ticket.getSeat().getFlight().getBdTime());
-        System.out.println("");
-        System.out.println("Press any key to back to main menu : ");
-        char nothing = input.next().charAt(0);
         }
   
 }
