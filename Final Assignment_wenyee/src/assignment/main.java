@@ -19,14 +19,14 @@ public class main {
         int toMenu = 0;
         int chooseUser;
         Scanner sc = new Scanner(System.in);
-        Staff[] staffArray = new Staff[10]; // You can adjust the size as needed
+        Staff[] staffArray = new Staff[10]; // 
         ArrayList<Flight> flights = new ArrayList<>();
         ArrayList<Customer> cust = new ArrayList();
         ArrayList<Seat> arrSeat = new ArrayList<>();
         ArrayList<Payment> arrPayment = new ArrayList<>();
         ArrayList<Ticket> arrTicket = new ArrayList<>();
         Plane plane = new Plane();
-
+        //declare default object  
         flights.add(new Flight("F001", "Malaysia", "Japan", 1200, 1300, 2000, "11/11/2023", "12/11/2023", 200.00, 400.00, new Plane("PL04", 32)));
         flights.add(new Flight("F002", "Malaysia", "Japan", 1300, 1400, 1800, "11/11/2023", "14/11/2023", 300.00, 600.00, new Plane("PL05", 32)));
         flights.add(new Flight("F003", "Malaysia", "Japan", 1400, 1500, 1900, "11/11/2023", "13/11/2023", 400.00, 700.00, new Plane("PL03", 36)));
@@ -62,9 +62,9 @@ public class main {
         cust.add(cust2);
         cust.add(cust3);
         cust.add(cust4);
-
+        //main program start
         do {
-            System.out.println("===========================");
+            System.out.println("===========================");  //starting menu
             System.out.println("|       1. Staff          |");
             System.out.println("|       2. Customer       |");
             System.out.println("|       3. Exit           |");
@@ -81,10 +81,10 @@ public class main {
 
             switch (chooseUser) {
                 case 1:
-                    Staff.defineStaff(staffArray, flights, arrSeat, arrTicket, arrPayment);
+                    Staff.defineStaff(staffArray, flights, arrSeat, arrTicket, arrPayment);  //into staff module
                     chooseUser = 0;
                     break;
-                case 2:
+                case 2:         //customer module
                     char yesNo;
                     int numOfCust = 0;
                     int next = 0;
@@ -97,16 +97,16 @@ public class main {
                             yesNo = sc.next().toUpperCase().charAt(0);
                             sc.nextLine(); // Consume the newline character
                             if (yesNo == 'N') {
-                                next = customer.register(cust);
+                                next = customer.register(cust);         //customer register module
                             }
                             if (yesNo == 'Y' || next == 1) {
-                                numOfCust = customer.login(cust);
+                                numOfCust = customer.login(cust);       //customer login module
                             } else {
                                 System.out.printf("                Invalid character...Input y/n only\n\n");
                             }
                         } while (yesNo != 'Y' && yesNo != 'N');
                         do {
-                            Customer.displayCustomerAction();
+                            Customer.displayCustomerAction();   //display customer main menu
                             do {
                                 try {
                                     System.out.printf("             Choose one action from the list > ");
@@ -117,9 +117,9 @@ public class main {
 
                                 switch (choose) {
                                     case 1:
-                                        customer.displaySearchFlight(sc, flights);
+                                        customer.displaySearchFlight(sc, flights);          //search suitable flight module
                                         do {
-                                            System.out.print("              Proceed to Booking(y=Yes/n=No) : ");
+                                            System.out.print("              Proceed to Booking(y=Yes/n=No) : ");        //ask to go to booking module
                                             book = sc.next().toUpperCase().charAt(0);
                                             if (book == 'Y') {
                                                 do {
