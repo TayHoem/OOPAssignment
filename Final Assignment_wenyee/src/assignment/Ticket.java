@@ -9,25 +9,24 @@ package assignment;
  * @author ANG
  */
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class Ticket implements Cloneable {
+public class Ticket {
 
     private Seat seat;
     private Passenger passenger;
     private Customer customer;
-
+    //constructor
     public Ticket(Seat seat, Passenger passenger, Customer customer) {
 
         this.seat = seat;
         this.passenger = passenger;
         this.customer = customer;
     }
-
+    //getter
     public Seat getSeat() {
         return seat;
     }
-
+    
     public Passenger getPassenger() {
         return passenger;
     }
@@ -35,7 +34,7 @@ public class Ticket implements Cloneable {
     public Customer getCustomer() {
         return customer;
     }
-
+    //generate ticket object after the customer make payment 
     public static ArrayList generateTicket(ArrayList<Ticket> arrTicket, ArrayList<Ticket> tempTckt) {
         for (int i = 0; i < tempTckt.size(); i++) {
             //Ticket tempTk = (Ticket)tempTckt.get(i).clone();
@@ -45,7 +44,7 @@ public class Ticket implements Cloneable {
 
         return arrTicket;
     }
-
+    //display ticket that book by the customer
     public void ticketDisplay(Ticket ticket) {
         //  return "Ticket{" + "seat=" + seat + ", passenger=" + passenger + ", customer=" + customer + '}';
         System.out.printf("             %-10s: %-35s\n", "Name ", ticket.getPassenger().getName());
