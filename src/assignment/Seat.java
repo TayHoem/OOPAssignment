@@ -17,7 +17,7 @@ public class Seat {
     private String typeOfSeat;
     private String statusSeat;
     private Flight flight;
-
+    //constructor
     public Seat(int seatID, String typeOfSeat, String statusSeat, Flight flight) {
         this.seatID = seatID;
         this.typeOfSeat = typeOfSeat;
@@ -25,7 +25,7 @@ public class Seat {
         this.flight = flight;
 
     }
-
+    //setter
     public void setSeatID(int seatID) {
         this.seatID = seatID;
     }
@@ -33,7 +33,7 @@ public class Seat {
     public void setStatusSeat(String statusSeat) {
         this.statusSeat = statusSeat;
     }
-
+    //getter
     public int getSeatID() {
         return seatID;
     }
@@ -49,7 +49,7 @@ public class Seat {
     public Flight getFlight() {
         return flight;
     }
-
+    //use for checking the seat status is empty for displaying the seat status when customer booking
     public boolean findSeatEmpty(ArrayList<Seat> arrSeat, int id, Flight flight) {
         boolean valid = false;
 
@@ -60,7 +60,7 @@ public class Seat {
         }
         return valid;
     }
-
+    //find the seat object that customer book
     public static Seat findSeat(ArrayList<Seat> arrSeat, ArrayList<Flight> arrFlight, int seatID, int bookFlight) {
         int successIndex = -1;
         for (int i = 0; i < arrSeat.size(); i++) {
@@ -116,7 +116,7 @@ public class Seat {
         sb.append('}');
         return sb.toString();
     }
-
+    //validation the seat is empty and not be booked and selected by customers
     public static boolean validSeatID(ArrayList<Seat> arrSeat, ArrayList<Flight> arrFlight, int searchSeat, int bookFlightIndex) {
         boolean valid = false;
         int successFind =0;
@@ -139,13 +139,13 @@ public class Seat {
             }
         }
         if (successFind ==0) {
-            System.out.println("                Seat ID does not exist.Please enter a valid Seat ID !!!");
+            System.out.println("                Seat ID does not exist.Please enter a valid Seat ID !!!");      //if seat id does not exist
             return valid;
         } else {
             return valid;
         }
     }
-    
+    //return all the selected but not be book seat turn back to empty status
     public static void returnEmpty(ArrayList<Seat> arrSeat){
         for(int i=0;i<arrSeat.size();i++){
             if(arrSeat.get(i).getStatusSeat().equalsIgnoreCase("Selected")){
