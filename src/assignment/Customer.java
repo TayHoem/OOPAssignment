@@ -232,7 +232,8 @@ public class Customer extends Person {
     public String toString() {
         return String.format(super.toString() + "\n                Customer I/C Number : %s\n                Customer Password : %s\n", custIcNo, custPassword);
     }
-
+    
+    // booking ticket process for select flight and seat
     public ArrayList bookingTicket(ArrayList<Seat> arrSeat, ArrayList<Flight> flights, int bookFlight, Customer tcustomer) {
         Scanner input = new Scanner(System.in);
         char isContinue = 'N';
@@ -280,7 +281,7 @@ public class Customer extends Person {
 
             Passenger tempPassenger = new Passenger(tempPassport, tempName, "", tempPhoneNo, "");
             Seat tempSeat = Seat.findSeat(arrSeat, flights, tempSeatID, bookFlight);
-            tempArrTicket.add(new Ticket(tempSeat, tempPassenger, tcustomer));
+            tempArrTicket.add(new Ticket(tempSeat, tempPassenger, tcustomer));      //add to temp arraylist to convenient for recover when customer cancel booking
 
             do {
                 System.out.printf("\n\n");
@@ -299,6 +300,7 @@ public class Customer extends Person {
         return tempArrTicket;
     }
 
+    //the complete booking flight ticket process
     public boolean booking(ArrayList<Flight> flights, ArrayList<Seat> arrSeat, ArrayList<Payment> arrPayment, ArrayList<Ticket> arrTicket, Customer customer1) {
         Scanner input = new Scanner(System.in);
         char respond;
@@ -335,7 +337,8 @@ public class Customer extends Person {
         } while (respond != 'Y' && respond != 'N');
         return true;
     }
-
+    
+    //ask customer to continue booking 
     public static boolean continueBooking() {
         Scanner input = new Scanner(System.in);
         System.out.print("              Are you continue to booking ? (Y = yes / N = no) : ");
@@ -347,6 +350,7 @@ public class Customer extends Person {
         }
     }
 
+    //display ticket that book by the customer
     public boolean displayTicket(ArrayList<Ticket> arrTicket) {
         Scanner input = new Scanner(System.in);
         int success = 0;
