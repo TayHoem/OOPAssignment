@@ -27,6 +27,7 @@ public class main {
         ArrayList<Ticket> arrTicket = new ArrayList<>();
         Plane plane = new Plane();
 
+        //declare default object
         flights.add(new Flight("F001", "Malaysia", "Japan", 1200, 1300, 2000, "11/11/2023", "12/11/2023", 200.00, 400.00, new Plane("PL04", 32)));
         flights.add(new Flight("F002", "Malaysia", "Japan", 1300, 1400, 1800, "11/11/2023", "14/11/2023", 300.00, 600.00, new Plane("PL05", 32)));
         flights.add(new Flight("F003", "Malaysia", "Japan", 1400, 1500, 1900, "11/11/2023", "13/11/2023", 400.00, 700.00, new Plane("PL03", 36)));
@@ -63,7 +64,7 @@ public class main {
         cust.add(cust3);
         cust.add(cust4);
         
-
+         //main program start
         do {
             System.out.println("         /$$$$$$$$/$$      /$$  /$$$$$$  /$$     /$$");
             System.out.println("        |__  $$__/ $$  /$ | $$ /$$__  $$|  $$   /$$/");
@@ -91,10 +92,10 @@ public class main {
 
             switch (chooseUser) {
                 case 1:
-                    Staff.defineStaff(staffArray, flights, arrSeat, arrTicket, arrPayment);
+                    Staff.defineStaff(staffArray, flights, arrSeat, arrTicket, arrPayment);  //into staff module
                     chooseUser = 0;
                     break;
-                case 2:
+                case 2:         //customer module
                     char yesNo;
                     int numOfCust = 0;
                     int next = 0;
@@ -119,7 +120,7 @@ public class main {
                             }
                         } while (yesNo != 'Y' && yesNo != 'N');
                         do {
-                            Customer.displayCustomerAction();
+                            Customer.displayCustomerAction();   //display customer main menu
                             do {
                                 try {
                                     System.out.printf("             Choose one action from the list > ");
