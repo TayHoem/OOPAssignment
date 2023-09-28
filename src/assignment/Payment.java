@@ -21,7 +21,6 @@ public class Payment {
     private double amount;
     private LocalDate paymentDate;
     private LocalTime paymentTime;
-    private boolean paymentStatus;
     private String bankName;
     private String cardNo;
     private int cvNo;
@@ -52,10 +51,6 @@ public class Payment {
         return paymentDate;
     }
 
-    public boolean getPaymentStatus() {
-        return paymentStatus;
-    }
-
     public LocalTime getPaymentTime() {
         return paymentTime;
     }
@@ -74,10 +69,6 @@ public class Payment {
 
     public void setAmount(double amount) {
         this.amount = amount;
-    }
-
-    public void setPaymentStatus(boolean paymentSatus) {
-        this.paymentStatus = paymentSatus;
     }
 
     public void setPaymentID(int paymentID) {
