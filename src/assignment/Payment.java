@@ -116,23 +116,13 @@ public class Payment {
 
     @Override
     public String toString() {
-        if (this.paymentStatus == true) {
-            return "\n===============================\n\t" + bankName + "\n       Payment Success!!!      \n|Payment ID: " + paymentID
-                    + "\t\t|\n|Date: " + paymentDate
-                    + "\t\t|\n|Time: " + paymentTime
-                    + "\t|\n|Total Amount: RM " + amount
-                    + "\t|\n|Card Number: " + cardNo
-                    + "\t|\n|CV number: " + cvNo
-                    + "\t\t\t|\n===============================\n";
-        } else {
-            return "\n===============================\n\t" + bankName + "\n       Payment Failed!!!        \n|Payment ID: " + paymentID
-                    + "\t\t|\n|Date: " + paymentDate
-                    + "\t\t|\n|Time: " + paymentTime
-                    + "\t|\n|Total Amount: RM " + amount
-                    + "\t|\n|Card Number: " + cardNo
-                    + "\t|\n|CV number: " + cvNo
-                    + "\t\t\t|\n===============================\n";
-        }
+        return "\n===============================\n\t" + bankName + "\n       Payment Success!!!      \n|Payment ID: " + paymentID
+                 + "\t\t|\n|Date: " + paymentDate
+                 + "\t\t|\n|Time: " + paymentTime
+                 + "\t|\n|Total Amount: RM " + amount
+                 + "\t|\n|Card Number: " + cardNo
+                 + "\t|\n|CV number: " + cvNo
+                 + "\t\t|\n===============================\n";
     }
 
     public static double calcPayment(ArrayList<Ticket> tempTckt) {
