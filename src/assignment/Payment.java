@@ -34,6 +34,7 @@ public class Payment {
         this.cardNo = cardNo;
         this.cvNo = cvNo;
         this.bankName = bankName;
+        this.paymentStatus = paymentStatus;
         paymentDate = LocalDate.now();
         paymentTime = LocalTime.now();
         nextPaymentID++;
@@ -71,7 +72,6 @@ public class Payment {
         return paymentStatus;
     }
 
-    
     public void setAmount(double amount) {
         this.amount = amount;
     }
