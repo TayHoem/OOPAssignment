@@ -11,6 +11,7 @@ package assignment;
 public class Passenger extends Person{
     private String passportNo;
 
+    //constructor
     public Passenger() {
         super("","","",""); 
         passportNo = null;
@@ -27,15 +28,15 @@ public class Passenger extends Person{
         super("","","","");
         this.passportNo = passportNo;
     }
-
+    //getter
     public String getPassportNo() {
         return passportNo;
     }
-
+    //setter
     public void setPassportNo(String passportNo) {
         this.passportNo = passportNo;
     }
-
+    //validation for passport number
     public boolean ValidPassportNo(String passportNo) {
         // Basic validation: Check if the name contains only letters and spaces
         if (passportNo.matches("[A-Z]\\d{8}")) {
@@ -47,8 +48,5 @@ public class Passenger extends Person{
         }
         return false;
     }
-    
-    
-    
     
 }
