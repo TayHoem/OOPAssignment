@@ -180,6 +180,4 @@ public class main {
         } while (chooseUser < 1 || chooseUser > 2);
     }
 
-    public void customerAction(ArrayList<Customer> cust, ArrayList<Flight> flight, ArrayList<Seat> arrSeat, ArrayList<Payment> arrPayment, ArrayList<Ticket> arrTicket) {
-    }
 }
