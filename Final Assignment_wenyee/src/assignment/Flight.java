@@ -625,7 +625,7 @@ public class Flight {
                 + "\n               Business Price: RM " + bsPrice
                 + plane;
     }
-
+    //display flight and all seat status based on the flight id
     public static int displayFlight(ArrayList<Flight> flights, ArrayList<Seat> arrSeat) {
         Scanner input = new Scanner(System.in);
         int numSeat;
@@ -650,7 +650,7 @@ public class Flight {
         System.out.println("            ==============================================================");
         return indexOfFlight;
     }
-
+    //display seat status
     public static void displaySeat(ArrayList<Seat> arrSeat, int NumberSeat, Flight tFlight) {
 
         System.out.printf("                  0    1  \t  2    3\n");
@@ -661,14 +661,14 @@ public class Flight {
 
                 if (arrSeat.get(i).findSeatEmpty(arrSeat, (i * 10 + j), tFlight)) {
                     if (i == 1) {
-                        System.out.print("*    ");
+                        System.out.print("*    ");  //row 1 will always the business class seat(*)
 
                     } else {
-                        System.out.print("o    ");
+                        System.out.print("o    ");  //economy seat(o)
 
                     }
                 } else {
-                    System.out.print("x    ");
+                    System.out.print("x    ");      //booked seat(x)
 
                 }
                 if (j == 1) {
@@ -679,7 +679,7 @@ public class Flight {
             System.out.println("");
         }
     }
-
+    //validation for customer input flight id
     public static boolean validFlightID(ArrayList<Flight> flights, String searchID) {
         boolean valid = false;
         for (int i = 0; i < flights.size(); i++) {
@@ -692,7 +692,7 @@ public class Flight {
         }
         return valid;
     }
-
+    //define seat object after add flights
     public void defineSeat(ArrayList<Seat> arrSeat, Flight dFlight) {
         //i=1 type = business
         for (int i = 1; i <= (dFlight.getPlane().getNumOfSeat() / 4); i++) {
