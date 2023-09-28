@@ -21,7 +21,7 @@ public class Payment {
     private double amount;
     private LocalDate paymentDate;
     private LocalTime paymentTime;
-    private boolean paymentStatus;
+    private boolean paymentStatus; 
     private String bankName;
     private String cardNo;
     private int cvNo;
@@ -34,7 +34,6 @@ public class Payment {
         this.cardNo = cardNo;
         this.cvNo = cvNo;
         this.bankName = bankName;
-        this.paymentStatus = paymentStatus;
         paymentDate = LocalDate.now();
         paymentTime = LocalTime.now();
         nextPaymentID++;
@@ -56,10 +55,6 @@ public class Payment {
         return paymentTime;
     }
 
-    public boolean getPaymentStatus() {
-        return paymentStatus;
-    }
-
     public String getCardNo() {
         return cardNo;
     }
@@ -72,6 +67,11 @@ public class Payment {
         return bankName;
     }
 
+    public boolean getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    
     public void setAmount(double amount) {
         this.amount = amount;
     }
